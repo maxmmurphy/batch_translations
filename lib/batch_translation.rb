@@ -7,7 +7,7 @@ module ActionView
         object_name = "[translations_attributes][#{@index}]"
         object = @object.translations.find_by_locale locale.to_s 
         @template.concat @template.hidden_field_tag("#{@object.class.name.downcase}[#{object_name}][locale]", locale)
-        @template.concat @template.hidden_field_tag("#{@object.class.name.downcase}[#{object_name}][id]", object.id) if !object.nil?
+        @template.concat @template.hidden_field_tag("#{@object.class.name.downcase}[#{object_name}][id]", object.id) unless object.nil?
         tt = fields_for(object_name, object, *args, &proc)
         @template.concat tt
         @template
