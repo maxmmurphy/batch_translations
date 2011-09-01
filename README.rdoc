@@ -1,32 +1,31 @@
 = Batch translation
 
 Helper that renders globalize_translations fields on a per-locale basis, so you can use them
-separately in the same form and still saving them all at once in the same request.
+separately in the same form and still saving them all at once in the same request. Also works for editing objects and their translations.
 
 == Installation
 
 Batch translation supports Globalize 3 and is not backward compatible.
 
-  rails plugin install git://github.com/fidel/batch_translations.git
+  rails plugin install git://github.com/maxmmurphy/batch_translations.git
 
 == Model configuration
 
-In model, which uses Globalize after definition
+Define the fields to be translated
 
-  translates :title, :teaser, :body # or any other fields, which you translate
-
-place
+  translates :title, :teaser, :body
+  
+Add accepts_nested_attributes so that the globalize_fields_for will be accepted by your model
 
   accepts_nested_attributes_for :translations
 
-so it'll look like
+End product should be similar to:
 
   class Post < ActiveRecord::Base
     translates :title, :teaser, :body
     accepts_nested_attributes_for :translations
   end
 
-It's necessary for proper working.
 
 == Usage
 
@@ -65,4 +64,4 @@ Now, use it in your view file, like in these below:
 
 == License
 
-Copyright (c) 2010 Szymon Fiedler http://github.com/fidel, released under MIT License.
+Copyright (c) 2011 Max Murphy http://github.com/maxmmurphy, released under MIT License.
